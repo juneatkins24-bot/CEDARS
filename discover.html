@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover - CEDARS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cedar-green: #2D4D31;
+            --cedar-gold: #D4AF37;
+            --cedar-cream: #F5EFE0;
+            --text-dark: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--cedar-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+            position: relative;
+        }
+
+        /* Background Squiggles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 20%;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background-image: url('assets/15.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 15%;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Bottom Navigation - TEXT ONLY */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        nav li {
+            flex: 1;
+        }
+
+        nav a {
+            display: block;
+            color: var(--cedar-green);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--cedar-gold);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Video */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 35vh;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 28vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 25vh;
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/13.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: var(--cedar-green);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* NFC Plaque Section - FIXED FOR MOBILE */
+        .nfc-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nfc-intro img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .nfc-intro {
+                grid-template-columns: 1fr;
+            }
+            
+            .nfc-intro img {
+                max-width: 100%;
+                width: 100%;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+
+        /* How NFC Works */
+        .nfc-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nfc-step {
+            background: var(--cedar-cream);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--cedar-gold);
+        }
+
+        .nfc-step h4 {
+            color: var(--cedar-green);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Map Container */
+        .map-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            min-height: 500px;
+            position: relative;
+            z-index: 2;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+        }
+
+        .story-panel {
+            background: var(--cedar-cream);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--cedar-gold);
+            overflow-y: auto;
+            max-height: 500px;
+        }
+
+        .story-panel h3 {
+            color: var(--cedar-green);
+            margin-bottom: 1rem;
+        }
+
+        .story-panel p {
+            margin-bottom: 1rem;
+        }
+
+        .story-panel audio {
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+            
+            #map {
+                height: 400px;
+            }
+        }
+
+        /* Wayfinding Section */
+        .wayfinding-section {
+            background: white;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wayfinding-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .wayfinding-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .wayfinding-content img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .wayfinding-text h2 {
+            color: var(--cedar-green);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .wayfinding-text p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .wayfinding-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .wayfinding-feature {
+            background: var(--cedar-cream);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--cedar-gold);
+        }
+
+        .wayfinding-feature h4 {
+            color: var(--cedar-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .wayfinding-content {
+                grid-template-columns: 1fr;
+            }
+
+            .wayfinding-text h2 {
+                font-size: 2rem;
+            }
+
+            .wayfinding-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cedar-green);
+            color: var(--cedar-cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 80px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 0.65rem;
+                padding: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bottom Navigation - TEXT ONLY -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="create.html">Create</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="discover.html" class="active">Discover</a></li>
+            <li><a href="amplify.html">Amplify</a></li>
+            <li><a href="reclaim.html">Reclaim</a></li>
+            <li><a href="stories.html">Stories</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Video Hero -->
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="assets/Discover.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="section">
+            <h2>Discover South Dallas Heritage</h2>
+            <p>Experience South Dallas history through our interactive NFC-enabled plaques located throughout DART stations. Simply tap your phone on the CEDARS plaques to instantly access audio stories, historical photos, and community memories from the people who shaped this neighborhood.</p>
+        </section>
+
+        <!-- NFC Plaque Photo & Explanation -->
+        <section class="section">
+            <h2>How NFC Technology Works</h2>
+            
+            <div class="nfc-intro">
+                <img src="assets/Plaque_CEDARS.jpg" alt="CEDARS NFC Plaque at DART Station">
+                <div>
+                    <p>Our CEDARS plaques use Near Field Communication (NFC) technology - the same technology used for contactless payments. When you tap your smartphone on a CEDARS plaque, it instantly connects you to the stories of that location.</p>
+                    <p>No app download required! Your phone automatically recognizes the NFC tag and opens the story in your browser.</p>
+                </div>
+            </div>
+
+            <div class="nfc-steps">
+                <div class="nfc-step">
+                    <h4>Step 1: Find a Plaque</h4>
+                    <p>Look for CEDARS plaques at DART stations throughout South Dallas.</p>
+                </div>
+                <div class="nfc-step">
+                    <h4>Step 2: Tap Your Phone</h4>
+                    <p>Hold your smartphone near the plaque's NFC area.</p>
+                </div>
+                <div class="nfc-step">
+                    <h4>Step 3: Listen & Learn</h4>
+                    <p>The story opens automatically - no app needed!</p>
+                </div>
+                <div class="nfc-step">
+                    <h4>Step 4: Share</h4>
+                    <p>Share the story with friends and family to spread South Dallas heritage.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Map -->
+        <section class="section">
+            <h2>Explore Story Locations</h2>
+            <p>Click on the markers below to preview stories from historic South Dallas locations. Visit these spots in person to experience the full audio story via NFC!</p>
+            
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="story-panel" id="storyPanel">
+                    <h3>Select a Location</h3>
+                    <p>Click on a marker on the map to hear a preview of the story from that location.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wayfinding Signage Section -->
+        <section class="wayfinding-section">
+            <div class="wayfinding-content">
+                <img src="assets/wayfinding.png" alt="CEDARS Wayfinding Signs at DART Station">
+                <div class="wayfinding-text">
+                    <h2>Navigate South Dallas</h2>
+                    <p>Our wayfinding signs guide you through South Dallas's cultural landmarks. Located at key DART stations, these signs help you discover venues, historic sites, and community spaces.</p>
+                    
+                    <div class="wayfinding-features">
+                        <div class="wayfinding-feature">
+                            <h4>QR Codes</h4>
+                            <p>Scan to download the CEDARS app and access full stories</p>
+                        </div>
+                        <div class="wayfinding-feature">
+                            <h4>NFC Tags</h4>
+                            <p>Tap your phone for instant access to directions and stories</p>
+                        </div>
+                        <div class="wayfinding-feature">
+                            <h4>Walking Directions</h4>
+                            <p>Clear signage showing distances to nearby venues and sites</p>
+                        </div>
+                        <div class="wayfinding-feature">
+                            <h4>Transit Integration</h4>
+                            <p>Connected to DART routes for seamless navigation</p>
+                        </div>
+                    </div>
+
+                    <p>The interactive wayfinding system makes it easy for residents and visitors to discover South Dallas's rich cultural heritage while navigating between DART stations and local destinations.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CEDARS | rooted in south dallas</p>
+        <p>In partnership with DART</p>
+    </footer>
+
+    <!-- Google Maps JavaScript -->
+    <script>
+        let map;
+        let markers = [];
+
+        // Story data with CORRECT locations
+        const stories = [
+            {
+                title: "Fair Park",
+                lat: 32.7819,
+                lng: -96.7617,
+                audio: "assets/fair-park-story.mp3",
+                narrator: "Mrs. Dorothy Johnson",
+                period: "1965-1985",
+                description: "Fair Park was the heart of our community. Every year, the State Fair brought families together. We'd walk through the art deco buildings, kids running between the fountains. Those Music Hall performances on Friday nights - that's where I first heard Ella Fitzgerald live. Fair Park wasn't just entertainment, it was where Black Dallas gathered, celebrated, and dreamed.",
+                type: "historic"
+            },
+            {
+                title: "Longhorn Ballroom",
+                lat: 32.7789,
+                lng: -96.7683,
+                audio: "assets/longhorn-ballroom.mp3",
+                narrator: "Mr. James Williams",
+                period: "1950-1990",
+                description: "The Longhorn Ballroom on Corinth Street was legendary. I saw Willie Nelson there in '74, and the Sex Pistols' infamous show in '78 - that was wild! But it was more than concerts. Saturday nights, the whole neighborhood would dress up. The ballroom was where South Dallas came alive, where you'd meet your future wife, where deals were made. That hardwood floor has seen more history than most museums.",
+                type: "historic"
+            },
+            {
+                title: "Forest Theater",
+                lat: 32.7443,
+                lng: -96.7701,
+                audio: "assets/forest-theater-story.mp3",
+                narrator: "Ms. Ruth Anderson",
+                period: "1945-1975",
+                description: "The Forest Theater on Forest Avenue was our palace. Every weekend, we'd line up to see the latest pictures. The ushers wore red uniforms with gold buttons - made us feel like royalty. During segregation, this was OUR theater. We didn't have to sit in the back or use a side entrance. The Forest was where Black Dallas saw itself on screen and celebrated together. When it closed, we lost more than a movie house. We lost a gathering place.",
+                type: "historic"
+            }
+        ];
+
+        function initMap() {
+            // Center map on South Dallas
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 32.7633, lng: -96.7700 },
+                zoom: 13,
+                styles: [
+                    {
+                        "featureType": "all",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#F5EFE0"}]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#8ABED4"}]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#ffffff"}]
+                    }
+                ]
+            });
+
+            // Add markers for each story
+            stories.forEach((story, index) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: story.lat, lng: story.lng },
+                    map: map,
+                    title: story.title,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 12,
+                        fillColor: "#D4AF37",
+                        fillOpacity: 1,
+                        strokeColor: "#2D4D31",
+                        strokeWeight: 3
+                    }
+                });
+
+                marker.addListener('click', () => {
+                    showStory(story);
+                });
+
+                markers.push(marker);
+            });
+        }
+
+        function showStory(story) {
+            const panel = document.getElementById('storyPanel');
+            
+            panel.innerHTML = `
+                <h3>${story.title}</h3>
+                <p><strong>Narrator:</strong> ${story.narrator}</p>
+                <p><strong>Time Period:</strong> ${story.period}</p>
+                
+                <audio controls>
+                    <source src="${story.audio}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                
+                <p style="margin-top: 1rem;">${story.description}</p>
+                
+                <p style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px; border-left: 3px solid #D4AF37;">
+                    <strong>Visit in Person:</strong> Tap your phone on the CEDARS plaque at this location to hear the complete story with additional memories and photos!
+                </p>
+            `;
+        }
+
+        // Load Google Maps when page loads
+        window.initMap = initMap;
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh1ssCOT2U_xgRVO5eT11kQjIgICuwojg&callback=initMap" async defer></script>
+</body>
+</html>

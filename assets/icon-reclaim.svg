@@ -1,0 +1,6 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Reclaim icon - Flag with flowing ribbon -->
+  <rect x="18" y="15" width="4" height="60" fill="#2D4D31" rx="2"/>
+  <path d="M22 20 Q35 15 48 20 Q48 35 35 40 Q22 35 22 20" fill="#D4AF37"/>
+  <path d="M48 25 Q55 20 62 25 T70 30" stroke="#2D4D31" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>

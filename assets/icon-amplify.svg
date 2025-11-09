@@ -1,0 +1,8 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Amplify icon - Megaphone with flowing sound waves -->
+  <path d="M55 30 Q60 35 65 30" stroke="#D4AF37" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M55 40 Q62 45 70 40" stroke="#D4AF37" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M55 50 Q60 55 65 50" stroke="#D4AF37" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M15 30 L40 20 L40 60 L15 50 Z" fill="#2D4D31"/>
+  <path d="M40 25 L50 30 L50 50 L40 55 Z" fill="#D4AF37"/>
+</svg>

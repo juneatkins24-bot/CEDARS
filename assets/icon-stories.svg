@@ -1,0 +1,9 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stories icon - Open book with flowing text lines -->
+  <path d="M20 25 L40 20 L60 25 L60 60 L40 55 L20 60 Z" fill="#F5EFE0" stroke="#2D4D31" stroke-width="3"/>
+  <line x1="40" y1="20" x2="40" y2="55" stroke="#2D4D31" stroke-width="2"/>
+  <path d="M26 35 Q30 33 34 35" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M26 42 Q32 40 34 42" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M46 35 Q50 33 54 35" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M46 42 Q52 40 54 42" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

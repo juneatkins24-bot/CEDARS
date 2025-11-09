@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stories - CEDARS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cedar-green: #2D4D31;
+            --cedar-gold: #D4AF37;
+            --cedar-cream: #F5EFE0;
+            --text-dark: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--cedar-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+            position: relative;
+        }
+
+        /* Background Squiggles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 20%;
+            right: 5%;
+            width: 150px;
+            height: 150px;
+            background-image: url('assets/15.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 15%;
+            left: 3%;
+            width: 180px;
+            height: 180px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Bottom Navigation - NO ICONS */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        nav li {
+            flex: 1;
+        }
+
+        nav a {
+            display: block;
+            color: var(--cedar-green);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--cedar-gold);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Video Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 35vh;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 28vh;
+                min-height: 230px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 25vh;
+                min-height: 200px;
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 250px;
+            background-image: url('assets/13.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+            pointer-events: none;
+            transform: translate(30%, -30%);
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            transform: translate(-30%, 30%);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: var(--cedar-green);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            color: var(--cedar-green);
+            margin: 2rem 0 1rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* NFC Feature Image */
+        .nfc-feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nfc-feature img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .nfc-feature-text h3 {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nfc-feature {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Audio Stories Grid */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-card {
+            background: var(--cedar-cream);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--cedar-gold);
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .story-card h4 {
+            color: var(--cedar-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-meta {
+            color: var(--cedar-gold);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .story-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .story-card audio {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .story-details {
+            font-size: 0.85rem;
+            color: #666;
+            border-top: 1px solid rgba(45, 77, 49, 0.1);
+            padding-top: 1rem;
+        }
+
+        .story-details span {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* YouTube Videos Section */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .video-caption {
+            margin-top: 0.75rem;
+            color: var(--cedar-green);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-card {
+            background: var(--cedar-green);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--cedar-gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        /* Call to Action */
+        .cta-box {
+            background: var(--cedar-gold);
+            color: var(--text-dark);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-box h3 {
+            color: var(--cedar-green);
+            margin: 0 0 1rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--cedar-green);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cedar-green);
+            color: var(--cedar-cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 80px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.75rem;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 0.65rem;
+                padding: 0.3rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bottom Navigation - TEXT ONLY -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="create.html">Create</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="discover.html">Discover</a></li>
+            <li><a href="amplify.html">Amplify</a></li>
+            <li><a href="reclaim.html">Reclaim</a></li>
+            <li><a href="stories.html" class="active">Stories</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Video Hero -->
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="assets/Stories.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="section">
+            <h2>Voices of South Dallas</h2>
+            <p>Every story in our archive represents a living memory, a piece of South Dallas heritage preserved for future generations. From childhood memories at Fair Park to the music that filled the Longhorn Ballroom, these stories paint a picture of community, resilience, and joy that has defined South Dallas for decades.</p>
+            
+            <p>Browse our collection of audio stories, watch video testimonials, and discover the voices that make South Dallas unique.</p>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Audio Stories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Historic Locations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70</div>
+                    <div class="stat-label">Years of History</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NFC Feature -->
+        <section class="section">
+            <div class="nfc-feature">
+                <img src="assets/tap.png" alt="Person tapping phone on CEDARS NFC plaque">
+                <div class="nfc-feature-text">
+                    <h3>How to Experience Stories in Person</h3>
+                    <p>Our NFC-enabled plaques are installed at historic locations throughout South Dallas. Simply tap your phone against the plaque to instantly hear stories from that exact location.</p>
+                    <p><strong>It's that easy:</strong> Walk up, tap your phone, and listen to history come alive right where it happened.</p>
+                    <p>Find plaque locations on our <a href="discover.html" style="color: var(--cedar-gold); font-weight: 600;">Discover page</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Audio Stories -->
+        <section class="section">
+            <h2>Featured Audio Stories</h2>
+            <p>Listen to memories, experiences, and histories shared by South Dallas community members.</p>
+
+            <div class="stories-grid">
+                <!-- Fair Park Story -->
+                <div class="story-card">
+                    <h4>Fair Park Memories</h4>
+                    <div class="story-meta">Fair Park, Dallas</div>
+                    <p class="story-description">Mrs. Dorothy Johnson shares her cherished memories of visiting Fair Park as a child in the 1960s. From the State Fair of Texas to community gatherings, Fair Park has been the heart of South Dallas celebrations for generations.</p>
+                    
+                    <audio controls>
+                        <source src="assets/fair-park-story.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                    <div class="story-details">
+                        <span><strong>Narrator:</strong> Mrs. Dorothy Johnson</span>
+                        <span><strong>Time Period:</strong> 1965-1985</span>
+                        <span><strong>Location:</strong> Fair Park</span>
+                    </div>
+                </div>
+
+                <!-- Forest Theater Story -->
+                <div class="story-card">
+                    <h4>Forest Theater Heritage</h4>
+                    <div class="story-meta">Forest Theater, Dallas</div>
+                    <p class="story-description">Ms. Ruth Anderson recalls the Forest Theater as a cornerstone of Black cinema in Dallas. For decades, this theater showed films and hosted community events that brought South Dallas together through stories of Saturday matinees and first dates.</p>
+                    
+                    <audio controls>
+                        <source src="assets/forest-theater-story.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                    <div class="story-details">
+                        <span><strong>Narrator:</strong> Ms. Ruth Anderson</span>
+                        <span><strong>Time Period:</strong> 1945-1975</span>
+                        <span><strong>Location:</strong> Forest Theater</span>
+                    </div>
+                </div>
+
+                <!-- Longhorn Ballroom Story -->
+                <div class="story-card">
+                    <h4>The Longhorn Ballroom</h4>
+                    <div class="story-meta">Longhorn Ballroom, Dallas</div>
+                    <p class="story-description">Mr. James Williams tells the story of the legendary Longhorn Ballroom, which hosted everyone from Bob Wills to Ray Charles. This venue was where South Dallas came to dance, celebrate, and make history through the power of music.</p>
+                    
+                    <audio controls>
+                        <source src="assets/longhorn-ballroom.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                    <div class="story-details">
+                        <span><strong>Narrator:</strong> Mr. James Williams</span>
+                        <span><strong>Time Period:</strong> 1950-1990</span>
+                        <span><strong>Location:</strong> Longhorn Ballroom</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Stories from YouTube -->
+        <section class="section">
+            <h2>Community Video Stories</h2>
+            <p>Watch video testimonials and stories captured from South Dallas community members.</p>
+
+            <div class="video-grid">
+                <div>
+                    <div class="video-embed">
+                        <iframe 
+                            src="https://www.youtube.com/embed/QoQMSGo1ngE" 
+                            title="South Dallas Story 1"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-caption">Community Voices</p>
+                </div>
+
+                <div>
+                    <div class="video-embed">
+                        <iframe 
+                            src="https://www.youtube.com/embed/5_KvGuH8bwo" 
+                            title="South Dallas Story 2"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="video-caption">Historical Moments</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="cta-box">
+            <h3>Share Your Story</h3>
+            <p>Your memories matter. Add your voice to the CEDARS archive and help preserve South Dallas heritage for future generations.</p>
+            <a href="create.html" class="cta-button">Contribute Your Story</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CEDARS | rooted in south dallas</p>
+        <p>In partnership with DART</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Create icon - Pen/pencil with flowing line -->
+  <path d="M20 60 Q35 45 50 60 T65 45" stroke="#D4AF37" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M55 25 L60 20 L65 25 L60 30 Z" fill="#2D4D31"/>
+  <path d="M50 30 L55 25 L40 50" stroke="#2D4D31" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="38" cy="52" r="3" fill="#D4AF37"/>
+</svg>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - CEDARS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cedar-green: #2D4D31;
+            --cedar-gold: #D4AF37;
+            --cedar-cream: #F5EFE0;
+            --text-dark: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--cedar-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+            position: relative;
+        }
+
+        /* Background Squiggles - FIXED */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 20%;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background-image: url('assets/15.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 15%;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Bottom Navigation - TEXT ONLY */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        nav li {
+            flex: 1;
+        }
+
+        nav a {
+            display: block;
+            color: var(--cedar-green);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--cedar-gold);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Video - FIXED SIZING */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 40vh;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 28vh;
+                min-height: 230px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 25vh;
+                min-height: 200px;
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* FIXED SQUIGGLES - Extend past edges, more transparent */
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/13.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section:nth-child(even)::before {
+            background-image: url('assets/14.png');
+        }
+
+        .section:nth-child(even)::after {
+            background-image: url('assets/15.png');
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: var(--cedar-green);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* RAYE Poster Section */
+        .raye-section {
+            background: white;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Add squiggles to RAYE section too */
+        .raye-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/13.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .raye-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .raye-section img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            margin: 2rem auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .raye-section h2 {
+            color: var(--cedar-green);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .raye-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Venue Grid */
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .venue-card {
+            background: var(--cedar-cream);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--cedar-gold);
+            transition: all 0.3s ease;
+        }
+
+        .venue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border-color: var(--cedar-green);
+        }
+
+        .venue-card h3 {
+            color: var(--cedar-green);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+
+        .venue-card p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .venue-card a {
+            display: inline-block;
+            background: var(--cedar-green);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .venue-card a:hover {
+            background: var(--cedar-gold);
+            color: var(--text-dark);
+        }
+
+        /* Broadway Shows Grid */
+        .broadway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .broadway-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--cedar-gold);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .broadway-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .broadway-card h4 {
+            color: var(--cedar-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .broadway-card .date {
+            color: var(--cedar-gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .broadway-card p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .broadway-card a {
+            display: inline-block;
+            color: var(--cedar-green);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .broadway-card a:hover {
+            border-bottom-color: var(--cedar-gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cedar-green);
+            color: var(--cedar-cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 80px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.75rem;
+            }
+
+            .raye-section h2 {
+                font-size: 2rem;
+            }
+
+            .venue-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 0.65rem;
+                padding: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bottom Navigation - TEXT ONLY -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="create.html">Create</a></li>
+            <li><a href="experience.html" class="active">Experience</a></li>
+            <li><a href="discover.html">Discover</a></li>
+            <li><a href="amplify.html">Amplify</a></li>
+            <li><a href="reclaim.html">Reclaim</a></li>
+            <li><a href="stories.html">Stories</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Video Hero -->
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="assets/Experience.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="section">
+            <h2>Experience South Dallas Culture</h2>
+            <p>From world-class Broadway shows at Fair Park to intimate live music in Deep Ellum's historic venues, South Dallas offers unforgettable cultural experiences. Whether you're looking for concerts, theater, comedy, open mics, or community events, there's always something happening in our vibrant neighborhood.</p>
+            <p>Explore the venues, grab your tickets, and immerse yourself in the sounds, stories, and spirit of South Dallas.</p>
+        </section>
+
+        <!-- RAYE Event Poster -->
+        <section class="raye-section">
+            <h2>Featured Event</h2>
+            <p>Experience world-class artists performing in South Dallas</p>
+            <img src="assets/Raye_Event_Poster.png" alt="RAYE Concert Event Poster">
+        </section>
+
+        <!-- Deep Ellum Music Venues -->
+        <section class="section">
+            <h2>Deep Ellum Live Music Venues</h2>
+            <p>Deep Ellum is the heart of Dallas's music scene, with venues hosting everything from indie rock to hip-hop to jazz. Catch a show at one of these legendary spots:</p>
+            
+            <div class="venue-grid">
+                <div class="venue-card">
+                    <h3>The Bomb Factory</h3>
+                    <p>Indoor concert venue and event space. One of Deep Ellum's premier destinations for live music with artists from all genres.</p>
+                    <a href="https://www.thefactoryindeepellum.com/" target="_blank">View Events</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Club Dada</h3>
+                    <p>Iconic venue featuring indie, alternative, and hip-hop acts. Known for its outdoor patio stage and intimate atmosphere.</p>
+                    <a href="https://dadadallas.com/" target="_blank">View Calendar</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Three Links Deep Ellum</h3>
+                    <p>Dive bar meets music venue. A Deep Ellum staple for discovering new bands and enjoying craft beers.</p>
+                    <a href="https://threelinksdeepellum.com/" target="_blank">View Shows</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Deep Ellum Art Co</h3>
+                    <p>Multi-purpose art gallery, music venue, and bar. Features the biggest art yard in Deep Ellum with live music and events.</p>
+                    <a href="https://www.deepellumart.co/" target="_blank">View Events</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Trees Dallas</h3>
+                    <p>Nationally recognized venue that's hosted legends like Post Malone, Pearl Jam, and Radiohead. Nearly three decades of Dallas music history.</p>
+                    <a href="https://www.ticketmaster.com/trees-dallas-tickets-dallas/venue/73743" target="_blank">Find Tickets</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>House of Blues Dallas</h3>
+                    <p>Live music and Southern-inspired cuisine amidst eclectic folk art. Downtown Dallas's premier destination for music-oriented visitors.</p>
+                    <a href="https://www.houseofblues.com/dallas" target="_blank">View Calendar</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>The Free Man</h3>
+                    <p>Deep Ellum bar with live music and a back patio. Casual atmosphere perfect for discovering local talent.</p>
+                    <a href="https://www.yelp.com/biz/the-free-man-dallas" target="_blank">Learn More</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>The Balcony Club</h3>
+                    <p>East Dallas institution featuring jazz and live music in an intimate setting. A Lakewood neighborhood favorite.</p>
+                    <a href="https://www.thebalconyclub.com/" target="_blank">View Schedule</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Open Mics & Community Events -->
+        <section class="section">
+            <h2>Open Mics & Community Showcases</h2>
+            <p>Share your talent or discover emerging artists at these welcoming open mic venues throughout South Dallas:</p>
+            
+            <div class="venue-grid">
+                <div class="venue-card">
+                    <h3>Opening Bell Coffee</h3>
+                    <p>Cozy coffee shop in the basement of South Side on Lamar with open mic nights and live acoustic performances.</p>
+                    <a href="https://www.openingbellcoffee.com/" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Truth Vinyl</h3>
+                    <p>Record shop with Thursday open mic nights. Great record selection with friendly owners who love music.</p>
+                    <a href="https://www.yelp.com/biz/truth-vinyl-dallas" target="_blank">Learn More</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Dallas Comedy Club</h3>
+                    <p>9,600 sq ft entertainment venue in Deep Ellum featuring comedy, improv training, and open mic shows.</p>
+                    <a href="https://do214.com/venues/dallas-comedy-club" target="_blank">View Shows</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Poor David's Pub</h3>
+                    <p>South Dallas live music venue and pub. Great atmosphere for singer-songwriters and acoustic performances.</p>
+                    <a href="https://www.poordavidspub.com/" target="_blank">Visit Website</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fair Park Broadway & Theater -->
+        <section class="section">
+            <h2>Fair Park Broadway Shows 2026</h2>
+            <p>Music Hall at Fair Park brings world-class Broadway productions to Dallas! Get your tickets now for these incredible shows:</p>
+            
+            <div class="broadway-grid">
+                <div class="broadway-card">
+                    <h4>The Outsiders</h4>
+                    <p class="date">Nov 4 - 16, 2025</p>
+                    <p>The groundbreaking new musical based on S.E. Hinton's beloved book.</p>
+                    <a href="https://www.broadway.org/theatres/music-hall-at-fair-park-dallas" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>Beauty and the Beast</h4>
+                    <p class="date">Dec 16, 2025 - Jan 4, 2026</p>
+                    <p>Disney's first North American touring production in over 25 years with spectacular new sets!</p>
+                    <a href="https://www.broadway.org/theatres/music-hall-at-fair-park-dallas" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>Kimberly Akimbo</h4>
+                    <p class="date">Jan 6 - 18, 2026</p>
+                    <p>Pulitzer Prize-winning musical about an extraordinary girl living life to the fullest.</p>
+                    <a href="https://www.broadway.org/theatres/music-hall-at-fair-park-dallas" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>SIX: The Musical</h4>
+                    <p class="date">Jan 27 - Feb 1, 2026</p>
+                    <p>Tudor Queens to Pop Icons! The six wives of Henry VIII remix 500 years of history into girl power!</p>
+                    <a href="https://www.dallasbroadwaytheatre.com/events/six-the-musical-27-january-2026/" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>The Great Gatsby</h4>
+                    <p class="date">Feb 17 - Mar 1, 2026</p>
+                    <p>Broadway extravaganza based on F. Scott Fitzgerald's classic American novel.</p>
+                    <a href="https://www.broadway.org/theatres/music-hall-at-fair-park-dallas" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>A Beautiful Noise: The Neil Diamond Musical</h4>
+                    <p class="date">Mar 10 - 22, 2026</p>
+                    <p>The uplifting true story of how a kid from Brooklyn became a chart-busting rock icon!</p>
+                    <a href="https://musichalldining.com/upcoming-shows.html" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>Some Like It Hot</h4>
+                    <p class="date">Mar 31 - Apr 12, 2026</p>
+                    <p>Winner of 4 Tony Awards including Best Choreography! The classic comedy in full technicolor!</p>
+                    <a href="https://musichalldining.com/upcoming-shows.html" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>Wicked</h4>
+                    <p class="date">May 6 - Jun 14, 2026</p>
+                    <p>The global phenomenon about the witches of Oz! The show everyone is losing their head over!</p>
+                    <a href="https://www.wickedfairpark.com/" target="_blank">Get Tickets →</a>
+                </div>
+
+                <div class="broadway-card">
+                    <h4>Clue</h4>
+                    <p class="date">Jun 16 - 28, 2026</p>
+                    <p>The hilarious board game comes to life on stage in this madcap murder mystery!</p>
+                    <a href="https://www.broadway.org/theatres/music-hall-at-fair-park-dallas" target="_blank">Get Tickets →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Major Dallas Venues -->
+        <section class="section">
+            <h2>Major Dallas Concert Venues</h2>
+            <p>Catch national tours and major artists at these iconic Dallas venues:</p>
+            
+            <div class="venue-grid">
+                <div class="venue-card">
+                    <h3>American Airlines Center</h3>
+                    <p>Home of the Dallas Mavericks and a major stop for nearly every concert tour in the country.</p>
+                    <a href="https://www.ticketmaster.com/american-airlines-center-tickets-dallas/venue/73903" target="_blank">View Events</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Dos Equis Pavilion</h3>
+                    <p>Outdoor amphitheater featuring major concerts with lawn seating and reserved seats. 2026 season tickets available!</p>
+                    <a href="https://www.dosequispavilion.com/" target="_blank">View Shows</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Granada Theater</h3>
+                    <p>Historic Greenville Avenue venue perfect for catching a more intimate show from touring artists.</p>
+                    <a href="https://www.granadatheater.com/" target="_blank">View Calendar</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>The Majestic Theatre</h3>
+                    <p>Originally a vaudeville venue, now home to comedy, concerts, podcasts, and performers of all kinds. A true multi-purpose megaplex.</p>
+                    <a href="https://www.majestic.dallasculture.org/" target="_blank">View Events</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Longhorn Ballroom</h3>
+                    <p>Historic South Dallas venue that's seen legendary performers from Loretta Lynn to Willie Nelson. Home to the infamous Sex Pistols show of 1978!</p>
+                    <a href="https://www.bandsintown.com/v/longhorn-ballroom" target="_blank">View Shows</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Meyerson Symphony Center</h3>
+                    <p>World-renowned concert hall and home of the Dallas Symphony Orchestra. Classical, jazz, and special performances.</p>
+                    <a href="https://www.meyersonsymphonycenter.com/" target="_blank">View Calendar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concert Ticket Resources -->
+        <section class="section">
+            <h2>Find More Dallas Concerts & Events</h2>
+            <p>Browse these sites to discover all upcoming concerts, festivals, and live events in Dallas:</p>
+            
+            <div class="venue-grid">
+                <div class="venue-card">
+                    <h3>Bandsintown Dallas</h3>
+                    <p>Track artists and get notified about upcoming shows. Over 56 concerts and festivals scheduled.</p>
+                    <a href="https://www.bandsintown.com/c/dallas-tx" target="_blank">Browse Events</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Songkick Dallas</h3>
+                    <p>Find tickets to all live music, concerts, and tour dates. Currently over 900+ upcoming events!</p>
+                    <a href="https://www.songkick.com/metro-areas/35129-us-dallas-fort-worth" target="_blank">View Calendar</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>Dallas Concert Calendar</h3>
+                    <p>Complete schedule of current and upcoming 2025/2026 concerts across all genres and venues.</p>
+                    <a href="https://dallas-tx.events/concerts/" target="_blank">See All Shows</a>
+                </div>
+
+                <div class="venue-card">
+                    <h3>JamBase Dallas</h3>
+                    <p>Discover concerts and track your favorite artists. Filter by venue, genre, and date.</p>
+                    <a href="https://www.jambase.com/concerts/us/texas/concerts-in-dallas" target="_blank">Find Shows</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CEDARS | rooted in south dallas</p>
+        <p>In partnership with DART</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reclaim - CEDARS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cedar-green: #2D4D31;
+            --cedar-gold: #D4AF37;
+            --cedar-cream: #F5EFE0;
+            --text-dark: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--cedar-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+            position: relative;
+        }
+
+        /* Background Squiggles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 20%;
+            right: 5%;
+            width: 150px;
+            height: 150px;
+            background-image: url('assets/15.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 15%;
+            left: 3%;
+            width: 180px;
+            height: 180px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Bottom Navigation - NO ICONS */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        nav li {
+            flex: 1;
+        }
+
+        nav a {
+            display: block;
+            color: var(--cedar-green);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--cedar-gold);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Video Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 35vh;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 28vh;
+                min-height: 230px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 25vh;
+                min-height: 200px;
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 250px;
+            background-image: url('assets/13.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+            pointer-events: none;
+            transform: translate(30%, -30%);
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            transform: translate(-30%, 30%);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: var(--cedar-green);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section h3 {
+            font-size: 1.5rem;
+            color: var(--cedar-green);
+            margin: 2rem 0 1rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card {
+            background: var(--cedar-cream);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--cedar-gold);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .project-card h4 {
+            color: var(--cedar-green);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .project-status {
+            display: inline-block;
+            background: var(--cedar-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Organization Links */
+        .org-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .org-link {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border: 2px solid var(--cedar-cream);
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .org-link:hover {
+            border-color: var(--cedar-gold);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .org-link h4 {
+            color: var(--cedar-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .org-link p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .org-link span {
+            color: var(--cedar-gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Call to Action */
+        .cta-box {
+            background: var(--cedar-green);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-box h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--cedar-gold);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--cedar-cream);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cedar-green);
+            color: var(--cedar-cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 80px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.75rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .org-links {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+
+            .cta-box {
+                padding: 2rem 1.5rem;
+            }
+
+            .cta-box h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 0.65rem;
+                padding: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bottom Navigation - TEXT ONLY -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="create.html">Create</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="discover.html">Discover</a></li>
+            <li><a href="amplify.html">Amplify</a></li>
+            <li><a href="reclaim.html" class="active">Reclaim</a></li>
+            <li><a href="stories.html">Stories</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Video Hero -->
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="assets/Reclaim.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="section">
+            <h2>Reclaiming South Dallas Heritage</h2>
+            <p>South Dallas is experiencing a powerful movement of reclamation and revitalization. From historic theaters being restored to new businesses opening their doors, the community is taking ownership of its narrative and future. CEDARS stands at the center of this movement, documenting stories and supporting initiatives that keep South Dallas rooted in its heritage while growing toward the future.</p>
+            
+            <p>This is not gentrification. This is reclamation. This is community members investing in their own neighborhoods, preserving history, and building economic power from within.</p>
+        </section>
+
+        <!-- Active Reclamation Projects -->
+        <section class="section">
+            <h2>Active Reclamation Projects</h2>
+            <p>These projects represent the heartbeat of South Dallas revitalization, where community members are preserving history and building economic opportunity.</p>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4>Forest Theater Restoration</h4>
+                    <p>The historic Forest Theater, once a cornerstone of Black cinema in Dallas, is being restored by the community. This landmark hosted generations of South Dallas families and will soon reopen as a community arts center.</p>
+                    <p><strong>Vision:</strong> Cultural hub, film screenings, community events</p>
+                    <span class="project-status">In Progress</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>The Cedars Neighborhood</h4>
+                    <p>The Cedars has transformed into an artist district while maintaining affordability and community character. Local artists, musicians, and entrepreneurs are opening studios, galleries, and businesses.</p>
+                    <p><strong>Focus:</strong> Artist-owned spaces, community studios, local businesses</p>
+                    <span class="project-status">Ongoing</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>South Side on Lamar</h4>
+                    <p>This adaptive reuse project transformed a historic Sears building into a mixed-use space with local businesses like Opening Bell Coffee. The building maintains its architectural heritage while serving the community.</p>
+                    <p><strong>Impact:</strong> Local jobs, community gathering spaces, historic preservation</p>
+                    <span class="project-status">Established</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>DART Transit Integration</h4>
+                    <p>CEDARS partners with DART to ensure transit access connects South Dallas residents to opportunities while bringing visitors to local businesses and cultural sites.</p>
+                    <p><strong>Routes:</strong> Green Line, Blue Line connecting Fair Park and Downtown</p>
+                    <span class="project-status">Active Partnership</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>Community Land Trusts</h4>
+                    <p>Initiatives are underway to establish community land trusts that keep property ownership in the hands of South Dallas residents, preventing displacement through collective ownership models.</p>
+                    <p><strong>Goal:</strong> Permanent affordability, community control</p>
+                    <span class="project-status">Building Support</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>Local Business Incubators</h4>
+                    <p>Programs supporting South Dallas entrepreneurs to open businesses in their own neighborhoods, keeping economic power local and creating generational wealth.</p>
+                    <p><strong>Support:</strong> Business training, funding access, mentorship</p>
+                    <span class="project-status">Launching</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partner Organizations -->
+        <section class="section">
+            <h2>Organizations Lifting Dallas Voices</h2>
+            <p>These organizations are doing critical work to amplify community voices, preserve heritage, and fight displacement in South Dallas and beyond.</p>
+
+            <div class="org-links">
+                <a href="https://www.dallasinnovationalliance.com" target="_blank" class="org-link">
+                    <h4>Dallas Innovation Alliance</h4>
+                    <p>Supporting innovation and entrepreneurship in underserved Dallas communities</p>
+                    <span>Visit Website →</span>
+                </a>
+
+                <a href="https://www.fairparkfirst.org" target="_blank" class="org-link">
+                    <h4>Fair Park First</h4>
+                    <p>Community-led revitalization of Fair Park and surrounding neighborhoods</p>
+                    <span>Visit Website →</span>
+                </a>
+
+                <a href="https://buildingcommunitysouthdallasfoundation.org" target="_blank" class="org-link">
+                    <h4>Building Community South Dallas</h4>
+                    <p>Fighting displacement and supporting affordable housing initiatives</p>
+                    <span>Visit Website →</span>
+                </a>
+
+                <a href="https://www.cedarsunion.org" target="_blank" class="org-link">
+                    <h4>Cedars Union</h4>
+                    <p>Artist incubator providing studio space and resources for local creatives</p>
+                    <span>Visit Website →</span>
+                </a>
+
+                <a href="https://www.blackdallasmembers.com" target="_blank" class="org-link">
+                    <h4>Black Dallas Remembered</h4>
+                    <p>Preserving and sharing stories of Black Dallas history and heritage</p>
+                    <span>Visit Website →</span>
+                </a>
+
+                <a href="https://www.dallassouthdallas.org" target="_blank" class="org-link">
+                    <h4>South Dallas Community</h4>
+                    <p>Grassroots organizing for community power and self-determination</p>
+                    <span>Visit Website →</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Why Reclamation Matters -->
+        <section class="section">
+            <h2>Why Reclamation Matters</h2>
+            
+            <h3>Anti-Displacement</h3>
+            <p>Reclamation projects prioritize keeping South Dallas residents in their homes and neighborhoods. By supporting community-owned businesses, land trusts, and affordable housing, we fight displacement and keep generational ties intact.</p>
+
+            <h3>Economic Justice</h3>
+            <p>When South Dallas residents own businesses, property, and cultural institutions in their own neighborhoods, wealth stays in the community. Economic power becomes self-determined rather than extracted.</p>
+
+            <h3>Cultural Preservation</h3>
+            <p>South Dallas has rich cultural heritage that must be preserved and celebrated. From the Forest Theater to Fair Park, from jazz clubs to churches, these spaces tell the story of Black Dallas excellence and resilience.</p>
+
+            <h3>Community Voice</h3>
+            <p>Reclamation means South Dallas residents lead the conversation about their neighborhood's future. Outside developers don't get to decide. Community members do.</p>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="cta-box">
+            <h3>Join the Reclamation Movement</h3>
+            <p>Support South Dallas businesses. Share these stories. Advocate for community-led development. Help preserve our heritage while building our future.</p>
+            <a href="create.html" class="cta-button">Share Your Story</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CEDARS | rooted in south dallas</p>
+        <p>In partnership with DART</p>
+    </footer>
+</body>
+</html>

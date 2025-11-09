@@ -1,0 +1,663 @@
+/* ============================================
+   CEDARS - Complete Stylesheet
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --cedar-green: #2D4D31;
+    --cedar-gold: #D4AF37;
+    --cedar-cream: #F5EFE0;
+    --text-dark: #2C2C2C;
+    --border-radius: 12px;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background: white;
+}
+
+.content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ============================================
+   HEADER STYLES - CREAM TEXT FOR READABILITY
+   ============================================ */
+
+.page-header {
+    position: relative;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--cedar-green);
+    overflow: hidden;
+}
+
+.header-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.3;
+    background-image: url('../assets/route-pattern.svg');
+    background-size: cover;
+    background-position: center;
+}
+
+.page-header h1,
+header h1,
+.hero-title,
+.main-title {
+    color: #F5EFE0 !important; /* Cedar Cream */
+    background: none !important;
+    background-image: none !important;
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tagline {
+    color: var(--cedar-gold);
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Navigation */
+.main-nav {
+    background: white;
+    border-bottom: 2px solid var(--cedar-cream);
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.main-nav a {
+    color: var(--cedar-green);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background: var(--cedar-gold);
+    color: var(--text-dark);
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background: var(--cedar-green);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--cedar-gold);
+    color: var(--text-dark);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   NFC PLAQUE SECTION
+   ============================================ */
+
+.nfc-plaque-section {
+    padding: 4rem 2rem;
+    background: var(--cedar-cream);
+}
+
+.nfc-plaque-section h2 {
+    text-align: center;
+    color: var(--cedar-green);
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.nfc-explanation {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nfc-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nfc-text h3 {
+    color: var(--cedar-green);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.intro-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+}
+
+.how-it-works h4 {
+    color: var(--cedar-green);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.step {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: start;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--cedar-gold);
+    color: var(--text-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.step-content h5 {
+    color: var(--cedar-green);
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.step-content p {
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.story-types {
+    background: var(--cedar-cream);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.story-types h4 {
+    color: var(--cedar-green);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.story-types ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.story-types li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.story-types li:before {
+    content: "▸";
+    color: var(--cedar-gold);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+.story-types strong {
+    color: var(--cedar-green);
+}
+
+.accessibility-note {
+    background: #e8f4e8;
+    border-left: 4px solid var(--cedar-green);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 4px;
+}
+
+.accessibility-note p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.accessibility-note strong {
+    color: var(--cedar-green);
+}
+
+/* Example Stories */
+.example-stories {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+.example-stories h3 {
+    text-align: center;
+    color: var(--cedar-green);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.story-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.story-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--cedar-gold);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.story-card h4 {
+    color: var(--cedar-green);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.story-card .location {
+    color: var(--cedar-gold);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.story-card p {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.media-type {
+    display: inline-block;
+    background: var(--cedar-cream);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* ============================================
+   SMART EVENT POSTERS SECTION
+   ============================================ */
+
+.smart-posters-section {
+    padding: 4rem 2rem;
+    background: white;
+}
+
+.smart-posters-section h2 {
+    text-align: center;
+    color: var(--cedar-green);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.section-intro {
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.poster-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+}
+
+.poster-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.poster-interaction h3 {
+    color: var(--cedar-green);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.interaction-method {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: start;
+}
+
+.method-icon {
+    flex-shrink: 0;
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cedar-cream);
+    border-radius: 50%;
+}
+
+.method-content h4 {
+    color: var(--cedar-green);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.method-content p {
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.tech-note {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: #666;
+    font-style: italic;
+}
+
+.tech-note.discount {
+    background: #fff3cd;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    color: #856404;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.benefits {
+    background: var(--cedar-cream);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+.benefits h4 {
+    color: var(--cedar-green);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.benefits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefits li {
+    padding: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.poster-locations {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.poster-locations h3 {
+    text-align: center;
+    color: var(--cedar-green);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.location-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.location-item {
+    background: var(--cedar-cream);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.location-item h4 {
+    color: var(--cedar-green);
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.location-item p {
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* ============================================
+   DART PARTNERSHIP SECTION
+   ============================================ */
+
+.dart-partnership {
+    padding: 4rem 2rem;
+    background: white;
+}
+
+.dart-partnership h2 {
+    text-align: center;
+    color: var(--cedar-green);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.partnership-intro {
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.train-showcase {
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.train-showcase img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.partnership-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+}
+
+.detail-card {
+    background: var(--cedar-cream);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    border-top: 4px solid var(--cedar-gold);
+    transition: transform 0.3s ease;
+}
+
+.detail-card:hover {
+    transform: translateY(-4px);
+}
+
+.detail-card h3 {
+    color: var(--cedar-green);
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.detail-card p {
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.bottom-cta {
+    text-align: center;
+    font-size: 1.125rem;
+    color: var(--cedar-green);
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+/* ============================================
+   MAP SECTION
+   ============================================ */
+
+.map-section {
+    padding: 4rem 2rem;
+    background: var(--cedar-cream);
+    text-align: center;
+}
+
+.map-section h2 {
+    color: var(--cedar-green);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    background: var(--cedar-green);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .nfc-explanation {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+    
+    .nfc-plaque-section h2,
+    .smart-posters-section h2,
+    .dart-partnership h2 {
+        font-size: 2rem;
+    }
+    
+    .nfc-text h3,
+    .poster-interaction h3 {
+        font-size: 1.5rem;
+    }
+    
+    .story-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .poster-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .partnership-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .location-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}

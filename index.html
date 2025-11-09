@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEDARS - Culture, Experience, Discovery, Arts, Reclaim, South Dallas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cedar-green: #2D4D31;
+            --cedar-gold: #D4AF37;
+            --cedar-cream: #F5EFE0;
+            --text-dark: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--cedar-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Bottom Navigation - TEXT ONLY */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        nav li {
+            flex: 1;
+        }
+
+        nav a {
+            display: block;
+            color: var(--cedar-green);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--cedar-gold);
+        }
+
+        /* Hero Video */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 40vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 28vh;
+            }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Mission Statement */
+        .mission-statement {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 2rem 1rem;
+        }
+
+        .mission-statement p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: var(--cedar-green);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .mission-statement {
+                margin-bottom: 3rem;
+                padding: 1.5rem 1rem;
+            }
+
+            .mission-statement p {
+                font-size: 1.2rem;
+                line-height: 1.7;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mission-statement p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* NFC Poster Section - GREEN BACKGROUND */
+        .nfc-section {
+            background: var(--cedar-green);
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nfc-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 350px;
+            height: 350px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nfc-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 350px;
+            height: 350px;
+            background-image: url('assets/15.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nfc-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nfc-content img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .nfc-text h2 {
+            color: var(--cedar-gold);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nfc-text p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            color: var(--cedar-cream);
+        }
+
+        .nfc-features {
+            margin-top: 2rem;
+        }
+
+        .nfc-feature-item {
+            background: rgba(245, 239, 224, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--cedar-gold);
+        }
+
+        .nfc-feature-item strong {
+            color: var(--cedar-gold);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .nfc-feature-item {
+            color: var(--cedar-cream);
+        }
+
+        /* DART Partnership Section - GOLD BACKGROUND */
+        .dart-section {
+            background: var(--cedar-gold);
+            color: var(--text-dark);
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .dart-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .dart-content img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+
+        .dart-text h2 {
+            color: var(--cedar-green);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .dart-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .nfc-content,
+            .dart-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nfc-text h2,
+            .dart-text h2 {
+                font-size: 2rem;
+            }
+
+            .dart-text p {
+                font-size: 1rem;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav a {
+                font-size: 0.65rem;
+                padding: 0.3rem;
+            }
+
+            .nfc-text h2,
+            .dart-text h2 {
+                font-size: 1.75rem;
+            }
+        }
+
+        /* Section Cards */
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .section-card {
+            background: white;
+            padding: 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/13.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section-card::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section-card:nth-child(even)::before {
+            background-image: url('assets/14.png');
+        }
+
+        .section-card:nth-child(even)::after {
+            background-image: url('assets/15.png');
+        }
+
+        .section-card h3 {
+            color: var(--cedar-green);
+            font-size: 1.8rem;
+            margin-bottom: 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .section-card p {
+            display: none;
+        }
+
+        .section-card a {
+            display: none;
+        }
+
+        /* Mobile Design - COMPACT! */
+        @media (max-width: 768px) {
+            .sections-grid {
+                display: block;
+                gap: 0.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .section-card {
+                margin-bottom: 0.5rem;
+                padding: 0;
+                cursor: pointer;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+                border: 2px solid var(--cedar-green);
+            }
+
+            .section-card::before,
+            .section-card::after {
+                display: none;
+            }
+
+            .section-card:hover {
+                transform: none;
+            }
+
+            .section-card h3 {
+                font-size: 1.3rem;
+                margin: 0;
+                padding: 1rem 1.25rem;
+                text-align: left;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .section-card:nth-child(odd) {
+                background: var(--cedar-cream);
+            }
+
+            .section-card:nth-child(odd) h3 {
+                color: var(--cedar-green);
+            }
+
+            .section-card:nth-child(even) {
+                background: white;
+            }
+
+            .section-card:nth-child(even) h3 {
+                color: var(--cedar-green);
+            }
+
+            .section-content {
+                display: none !important;
+            }
+
+            .section-card h3::after {
+                content: '→';
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            .section-card {
+                text-decoration: none;
+                display: block;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cedar-green);
+            color: var(--cedar-cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 80px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bottom Navigation - TEXT ONLY -->
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="create.html">Create</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="discover.html">Discover</a></li>
+            <li><a href="amplify.html">Amplify</a></li>
+            <li><a href="reclaim.html">Reclaim</a></li>
+            <li><a href="stories.html">Stories</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Video -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/CEDARShero.mp4" type="video/mp4">
+        </video>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Mission Statement -->
+        <section class="mission-statement">
+            <p>CEDARS amplifies South Dallas voices and reclaims our community's space through storytelling, preserving our heritage and culture for generations to come.</p>
+        </section>
+
+        <!-- NFC Poster Section - GREEN BACKGROUND -->
+        <section class="nfc-section">
+            <div class="nfc-content">
+                <img src="assets/Interaction.png" alt="Person tapping phone on CEDARS poster in DART station">
+                <div class="nfc-text">
+                    <h2>Experience Stories on the Go</h2>
+                    <p>CEDARS posters are installed throughout Dallas DART stations and historic South Dallas locations. Each poster features NFC technology that lets you instantly access stories, events, and community content with just a tap of your phone.</p>
+                    
+                    <div class="nfc-features">
+                        <div class="nfc-feature-item">
+                            <strong>Find a CEDARS Poster</strong>
+                            Look for our distinctive gold and green posters in DART stations and at community locations
+                        </div>
+                        <div class="nfc-feature-item">
+                            <strong>Tap Your Phone</strong>
+                            Hold your NFC-enabled smartphone near the poster to instantly connect
+                        </div>
+                        <div class="nfc-feature-item">
+                            <strong>Discover Content</strong>
+                            Access audio stories, event details, and community information right from your phone
+                        </div>
+                        <div class="nfc-feature-item">
+                            <strong>Share Your Experience</strong>
+                            Post about your discovery using #CEDARS and #SouthDallasStories
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DART Partnership Section - GOLD BACKGROUND -->
+        <section class="dart-section">
+            <div class="dart-content">
+                <img src="assets/NewSubway.jpg" alt="CEDARS poster in DART station">
+                <div class="dart-text">
+                    <h2>In Partnership with DART</h2>
+                    <p>CEDARS collaborates with Dallas Area Rapid Transit to bring South Dallas stories directly to commuters and visitors. Our NFC-enabled posters are installed throughout DART stations, making it easy for anyone to discover and share community heritage while traveling through Dallas.</p>
+                    <p>This partnership ensures that South Dallas voices reach thousands of daily transit riders, connecting neighborhoods through shared stories and bringing visibility to community culture and events.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Cards - MOVED DOWN -->
+        <div class="sections-grid">
+            <!-- Create -->
+            <a href="create.html" class="section-card">
+                <h3>Create</h3>
+                <div class="section-content">
+                    <p>Share your South Dallas story through audio, video, photos, or text. Your memories become part of our collective heritage.</p>
+                    <a href="create.html">Start Creating</a>
+                </div>
+            </a>
+
+            <!-- Experience -->
+            <a href="experience.html" class="section-card">
+                <h3>Experience</h3>
+                <div class="section-content">
+                    <p>Attend events, concerts, and community gatherings that celebrate South Dallas culture and bring neighbors together.</p>
+                    <a href="experience.html">See Events</a>
+                </div>
+            </a>
+
+            <!-- Discover -->
+            <a href="discover.html" class="section-card">
+                <h3>Discover</h3>
+                <div class="section-content">
+                    <p>Explore interactive maps showing NFC-enabled story plaques and historic locations throughout South Dallas and The Cedars.</p>
+                    <a href="discover.html">Explore Map</a>
+                </div>
+            </a>
+
+            <!-- Amplify -->
+            <a href="amplify.html" class="section-card">
+                <h3>Amplify</h3>
+                <div class="section-content">
+                    <p>Share South Dallas stories on social media using our templates and hashtags to spread community voices far and wide.</p>
+                    <a href="amplify.html">Start Sharing</a>
+                </div>
+            </a>
+
+            <!-- Reclaim -->
+            <a href="reclaim.html" class="section-card">
+                <h3>Reclaim</h3>
+                <div class="section-content">
+                    <p>Learn about community-led revitalization projects fighting displacement and preserving South Dallas heritage through ownership.</p>
+                    <a href="reclaim.html">Join Movement</a>
+                </div>
+            </a>
+
+            <!-- Stories -->
+            <a href="stories.html" class="section-card">
+                <h3>Stories</h3>
+                <div class="section-content">
+                    <p>Browse our complete archive of audio stories, video testimonials, and memories shared by South Dallas community members.</p>
+                    <a href="stories.html">Listen Now</a>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CEDARS | rooted in south dallas</p>
+        <p>In partnership with DART</p>
+    </footer>
+</body>
+</html>

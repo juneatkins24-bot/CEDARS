@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amplify - CEDARS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cedar-green: #2D4D31;
+            --cedar-gold: #D4AF37;
+            --cedar-cream: #F5EFE0;
+            --text-dark: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--cedar-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+            position: relative;
+        }
+
+        /* Background Squiggles - FIXED */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 20%;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background-image: url('assets/15.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 15%;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Bottom Navigation - TEXT ONLY */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+
+        nav li {
+            flex: 1;
+        }
+
+        nav a {
+            display: block;
+            color: var(--cedar-green);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--cedar-gold);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Video */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 35vh;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 28vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 25vh;
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* FIXED SQUIGGLES */
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/13.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle2.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section:nth-child(even)::before {
+            background-image: url('assets/14.png');
+        }
+
+        .section:nth-child(even)::after {
+            background-image: url('assets/15.png');
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: var(--cedar-green);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Social Share Buttons */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-card {
+            background: var(--cedar-cream);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--cedar-gold);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .social-card h3 {
+            color: var(--cedar-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .social-card p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .social-btn {
+            display: inline-block;
+            background: var(--cedar-green);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: var(--cedar-gold);
+            color: var(--text-dark);
+        }
+
+        /* Hashtags Section */
+        .hashtags {
+            background: var(--cedar-green);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .hashtags h3 {
+            color: var(--cedar-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hashtag-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .hashtag {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Instagram Feed */
+        .instagram-section {
+            background: white;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instagram-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background-image: url('assets/squiggle.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .instagram-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--cedar-cream);
+            position: relative;
+            z-index: 2;
+        }
+
+        .ig-profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--cedar-gold), var(--cedar-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .ig-profile-info h3 {
+            color: var(--cedar-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .ig-profile-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .instagram-post {
+            position: relative;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #e8dcc4 0%, #d4c5a9 100%);
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Individual post images */
+        .instagram-post:nth-child(1) {
+            background-image: url('assets/instagram-1.jpg');
+        }
+
+        .instagram-post:nth-child(2) {
+            background-image: url('assets/instagram-2.jpg');
+        }
+
+        .instagram-post:nth-child(3) {
+            background-image: url('assets/instagram-3.jpg');
+        }
+
+        .instagram-post:nth-child(4) {
+            background-image: url('assets/instagram-4.jpg');
+        }
+
+        .instagram-post:nth-child(5) {
+            background-image: url('https://images.unsplash.com/photo-1601972599290-f8d8eee85271?w=800');
+        }
+
+        .instagram-post:nth-child(6) {
+            background-image: url('https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?w=800');
+        }
+
+        .instagram-post:nth-child(7) {
+            background-image: url('https://images.unsplash.com/photo-1548198328-5dc1cb9a4c9d?w=800');
+        }
+
+        .instagram-post:nth-child(8) {
+            background-image: url('https://images.unsplash.com/photo-1601972599237-9df0d4a06c51?w=800');
+        }
+
+        .instagram-post:nth-child(9) {
+            background-image: url('https://images.unsplash.com/photo-1564632516693-55d11ee81e17?w=800');
+        }
+
+        .instagram-post:hover {
+            transform: scale(1.02);
+        }
+
+        .instagram-post::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 77, 49, 0.85);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .instagram-post:hover::after {
+            opacity: 1;
+        }
+
+        .post-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.85rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+            pointer-events: none;
+            padding: 1rem;
+            width: 90%;
+        }
+
+        .instagram-post:hover .post-overlay {
+            opacity: 1;
+        }
+
+        /* Template Downloads */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .template-card {
+            background: var(--cedar-cream);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid var(--cedar-gold);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border-color: var(--cedar-green);
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 200px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cedar-green);
+            font-size: 1rem;
+            font-weight: 600;
+            border: 2px solid var(--cedar-cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-preview::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 40%;
+            background: var(--cedar-green);
+            top: 0;
+            left: 0;
+        }
+
+        .template-preview::after {
+            content: 'CEDARS';
+            position: absolute;
+            color: var(--cedar-gold);
+            font-size: 2rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .template-card h3 {
+            color: var(--cedar-green);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .template-card p {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: var(--cedar-green);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--cedar-gold);
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cedar-green);
+            color: var(--cedar-cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 80px;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.75rem;
+            }
+
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .instagram-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                font-size: 0.65rem;
+                padding: 0.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bottom Navigation - TEXT ONLY -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="create.html">Create</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="discover.html">Discover</a></li>
+            <li><a href="amplify.html" class="active">Amplify</a></li>
+            <li><a href="reclaim.html">Reclaim</a></li>
+            <li><a href="stories.html">Stories</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Video Hero -->
+        <section class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="assets/Amplify.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="section">
+            <h2>Amplify South Dallas Voices</h2>
+            <p>Help spread South Dallas stories across social media and beyond. Use our templates, hashtags, and tools to amplify the voices and heritage of our community. Together, we can ensure these stories reach audiences near and far.</p>
+            <p>Share your experiences, download our social media graphics, and tag us to connect with the CEDARS community online!</p>
+        </section>
+
+        <!-- Social Media Sharing -->
+        <section class="section">
+            <h2>Share on Social Media</h2>
+            <p>Spread the word about CEDARS and South Dallas heritage on your favorite platforms:</p>
+            
+            <div class="social-grid">
+                <div class="social-card">
+                    <h3>Instagram</h3>
+                    <p>Share photos of South Dallas landmarks, CEDARS plaques, and community moments.</p>
+                    <a href="https://www.instagram.com/" target="_blank" class="social-btn">Post to Instagram</a>
+                </div>
+
+                <div class="social-card">
+                    <h3>Twitter / X</h3>
+                    <p>Tweet about your favorite South Dallas stories and connect with the community.</p>
+                    <a href="https://twitter.com/intent/tweet?text=Discovering%20South%20Dallas%20heritage%20with%20CEDARS!%20%23SouthDallas%20%23CEDARS" target="_blank" class="social-btn">Tweet About Us</a>
+                </div>
+
+                <div class="social-card">
+                    <h3>Facebook</h3>
+                    <p>Share CEDARS stories with your friends and family on Facebook.</p>
+                    <a href="https://www.facebook.com/sharer/sharer.php" target="_blank" class="social-btn">Share on Facebook</a>
+                </div>
+
+                <div class="social-card">
+                    <h3>TikTok</h3>
+                    <p>Create short videos exploring South Dallas locations and stories.</p>
+                    <a href="https://www.tiktok.com/" target="_blank" class="social-btn">Post on TikTok</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hashtags -->
+        <section class="hashtags">
+            <h3>Official CEDARS Hashtags</h3>
+            <div class="hashtag-list">
+                <span class="hashtag">#CEDARS</span>
+                <span class="hashtag">#SouthDallas</span>
+                <span class="hashtag">#DallasHeritage</span>
+                <span class="hashtag">#SouthDallasStories</span>
+                <span class="hashtag">#CEDARSProject</span>
+                <span class="hashtag">#BlackDallas</span>
+                <span class="hashtag">#DallasHistory</span>
+                <span class="hashtag">#CommunityStories</span>
+                <span class="hashtag">#RootedInSouthDallas</span>
+                <span class="hashtag">#DARTStories</span>
+            </div>
+        </section>
+
+        <!-- Instagram Feed -->
+        <section class="instagram-section">
+            <div class="instagram-header">
+                <div class="ig-profile-pic">C</div>
+                <div class="ig-profile-info">
+                    <h3>@cedars_southdallas</h3>
+                    <p>Culture • Experience • Discovery • Arts • Reclaim • Stories</p>
+                </div>
+            </div>
+
+            <div class="instagram-grid">
+                <div class="instagram-post">
+                    <div class="post-overlay">South Dallas community moments captured</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">Heritage and culture in every corner</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">Stories that need to be told</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">CEDARS bringing voices to life</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">Downtown Dallas skyline at golden hour</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">Fair Park architecture - Art Deco treasures</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">Dallas streets where history lives</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">South Dallas neighborhoods thriving</div>
+                </div>
+
+                <div class="instagram-post">
+                    <div class="post-overlay">Community spaces that bring us together</div>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; font-style: italic; color: #666; position: relative; z-index: 2;">
+                Follow us on Instagram to see real community photos, stories, and events! Tag us in your South Dallas photos with #CEDARS
+            </p>
+        </section>
+
+        <!-- Template Downloads -->
+        <section class="section">
+            <h2>Download Social Media Templates</h2>
+            <p>Use these ready-made graphics to share CEDARS on your social channels. Each template includes space for your personal story or photo.</p>
+            
+            <div class="template-grid">
+                <div class="template-card">
+                    <div class="template-preview"></div>
+                    <h3>Instagram Story Template</h3>
+                    <p>Vertical format perfect for Instagram and Facebook Stories. 1080x1920px.</p>
+                    <a href="#" class="download-btn" onclick="downloadTemplate('story'); return false;">Download PNG</a>
+                </div>
+
+                <div class="template-card">
+                    <div class="template-preview"></div>
+                    <h3>Instagram Post Template</h3>
+                    <p>Square format for Instagram feed posts. 1080x1080px with CEDARS branding.</p>
+                    <a href="#" class="download-btn" onclick="downloadTemplate('post'); return false;">Download PNG</a>
+                </div>
+
+                <div class="template-card">
+                    <div class="template-preview"></div>
+                    <h3>TikTok Template</h3>
+                    <p>Vertical video thumbnail with CEDARS design elements. 1080x1920px.</p>
+                    <a href="#" class="download-btn" onclick="downloadTemplate('tiktok'); return false;">Download PNG</a>
+                </div>
+
+                <div class="template-card">
+                    <div class="template-preview"></div>
+                    <h3>Twitter Header</h3>
+                    <p>Banner graphic for Twitter/X profile headers. 1500x500px.</p>
+                    <a href="#" class="download-btn" onclick="downloadTemplate('twitter'); return false;">Download PNG</a>
+                </div>
+
+                <div class="template-card">
+                    <div class="template-preview"></div>
+                    <h3>Facebook Cover Photo</h3>
+                    <p>Cover image for Facebook pages and profiles. 820x312px.</p>
+                    <a href="#" class="download-btn" onclick="downloadTemplate('facebook'); return false;">Download PNG</a>
+                </div>
+
+                <div class="template-card">
+                    <div class="template-preview"></div>
+                    <h3>Brand Kit</h3>
+                    <p>Complete CEDARS brand kit including logos, colors, and fonts.</p>
+                    <a href="#" class="download-btn" onclick="downloadTemplate('brand'); return false;">Download ZIP</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Guidelines -->
+        <section class="section">
+            <h2>Sharing Guidelines</h2>
+            <p>When amplifying South Dallas stories, please keep these guidelines in mind:</p>
+            
+            <div style="position: relative; z-index: 2;">
+                <ul style="margin-left: 2rem; line-height: 2;">
+                    <li>Always credit storytellers and community members featured in content</li>
+                    <li>Use official CEDARS hashtags to connect with the broader community</li>
+                    <li>Tag @cedars_southdallas in your posts so we can share and celebrate</li>
+                    <li>Respect the privacy and dignity of all community members</li>
+                    <li>Share accurate information about locations and historical context</li>
+                    <li>Encourage others to visit South Dallas and experience stories in person</li>
+                    <li>Celebrate the diversity and richness of South Dallas culture</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="section" style="background: var(--cedar-green); color: white; text-align: center;">
+            <h2 style="color: var(--cedar-gold);">Join the Movement</h2>
+            <p style="color: white; font-size: 1.1rem;">Every share, post, and story helps preserve South Dallas heritage for future generations. Your voice matters in amplifying these important community narratives.</p>
+            <p style="color: white; margin-top: 2rem;">
+                <a href="create.html" class="social-btn" style="background: var(--cedar-gold); color: var(--text-dark);">Share Your Story</a>
+            </p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CEDARS | rooted in south dallas</p>
+        <p>In partnership with DART</p>
+    </footer>
+
+    <!-- JavaScript for Template Downloads -->
+    <script>
+        function downloadTemplate(type) {
+            alert(`Thank you for downloading the ${type} template! This is a demo - in the live version, this would download the actual template file.`);
+        }
+    </script>
+</body>
+</html>
