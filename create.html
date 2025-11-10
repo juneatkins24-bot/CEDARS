@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share your South Dallas story and contribute to community heritage preservation. CEDARS: Create • Experience • Discover • Amplify • Reclaim • Stories">
+<meta property="og:title" content="Create - CEDARS">
+<meta property="og:description" content="Share your South Dallas story and contribute to community heritage preservation. CEDARS: Create • Experience • Discover • Amplify • Reclaim • Stories">
+<meta property="og:type" content="website">
     <title>Create - CEDARS</title>
     <style>
         * {
@@ -109,14 +113,12 @@
             z-index: 1;
         }
 
-        /* Hero Video - FIXED SIZING */
+        /* Hero Video - MATCHES HOMEPAGE NOW */
         .hero {
             position: relative;
             width: 100%;
-            height: 25vh; /* Much smaller on desktop to show full video */
+            height: 100vh;
             overflow: hidden;
-            border-radius: 12px;
-            margin-bottom: 3rem;
         }
 
         .hero-video {
@@ -126,20 +128,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
         }
 
         @media (max-width: 768px) {
             .hero {
-                height: 28vh;
-                min-height: 230px;
+                height: 40vh;
             }
         }
 
         @media (max-width: 480px) {
             .hero {
-                height: 25vh;
-                min-height: 200px;
+                height: 28vh;
             }
         }
 

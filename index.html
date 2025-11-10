@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CEDARS - Culture, Experience, Discovery, Arts, Reclaim, South Dallas</title>
-    <style>
+   <meta name="description" content="CEDARS preserves and shares South Dallas heritage through interactive storytelling. Create • Experience • Discover • Amplify • Reclaim • Stories">
+<meta property="og:title" content="CEDARS - Rooted in South Dallas">
+<meta property="og:description" content="CEDARS preserves and shares South Dallas heritage through interactive storytelling. Create • Experience • Discover • Amplify • Reclaim • Stories">
+<meta property="og:type" content="website">
         * {
             margin: 0;
             padding: 0;
@@ -108,8 +110,12 @@
         .mission-statement {
             text-align: center;
             max-width: 900px;
-            margin: 0 auto 4rem;
-            padding: 2rem 1rem;
+            margin: 2rem auto 4rem;
+            padding: 2.5rem 2rem;
+            background: white;
+            border: 3px solid var(--cedar-green);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
 
         .mission-statement p {
@@ -301,7 +307,7 @@
         .sections-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin: 3rem 0;
         }
 
@@ -313,11 +319,17 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
         }
 
         .section-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .section-card:hover h3 {
+            color: var(--cedar-gold);
         }
 
         .section-card::before {
@@ -365,14 +377,22 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            padding: 2rem;
+            padding: 2rem 2rem;
         }
 
         .section-card p {
             display: none;
         }
 
-        .section-card a {
+        .section-card .section-content {
+            display: none;
+        }
+
+        .section-content * {
+            display: none;
+        }
+
+        .section-card a.section-link {
             display: none;
         }
 
